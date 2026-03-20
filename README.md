@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Grad2Office Website
+
+From Graduation to Corporate Confidence.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS v4
+- **Blog**: Markdown files with gray-matter + remark
+- **Deployment**: Vercel (free plan)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Blog Posts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Blog posts are written in Markdown and stored in `content/blog/`.
 
-## Learn More
+### Adding a New Blog Post
 
-To learn more about Next.js, take a look at the following resources:
+1. Add your blog image to `public/blog/`.
+   Example: `public/blog/my-post-cover.png`
+2. Create a new `.md` file in `content/blog/`
+3. Add frontmatter at the top:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```markdown
+---
+title: "Your Post Title"
+date: "2026-03-20"
+excerpt: "A brief summary of the post."
+author: "Smitha"
+tags: ["Tag1", "Tag2"]
+image: "/blog/my-post-cover.png"
+imageAlt: "A descriptive alt text for the blog cover image"
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Your content here...
+```
 
-## Deploy on Vercel
+4. Write your article content in Markdown. If you want an image inside the article body as well, use standard Markdown image syntax:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```markdown
+![A descriptive alt text](/blog/my-post-cover.png)
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. The post will automatically appear on the `/blog` page, and the `image` frontmatter will be used as the featured image on the listing and blog detail page.
+
+### Blog Image Notes
+
+- Store blog images inside `public/blog/`.
+- Use a wide cover image if possible. `1600x900` works well for featured cards and article headers.
+- Keep `imageAlt` descriptive so the image is accessible.
+
+## Deploying to Vercel
+
+1. Push this repo to GitHub
+2. Go to [vercel.com](https://vercel.com) and sign up with GitHub
+3. Click "Import Project" and select this repository
+4. Vercel will auto-detect Next.js — click "Deploy"
+5. Your site will be live at `your-project.vercel.app`
+
+### Custom Domain (Optional)
+
+In Vercel dashboard > Settings > Domains, add your custom domain.
+
+## Project Structure
+
+```
+src/
+  app/
+    page.tsx          # Home page
+    about/page.tsx    # About Smitha
+    programs/page.tsx # Programs details
+    contact/page.tsx  # Contact form
+    blog/
+      page.tsx        # Blog listing
+      [slug]/page.tsx # Individual blog post
+    layout.tsx        # Root layout (header + footer)
+    globals.css       # Global styles + Tailwind
+  components/
+    Header.tsx        # Navigation bar
+    Footer.tsx        # Site footer
+  lib/
+    blog.ts           # Markdown parsing utilities
+content/
+  blog/               # Markdown blog posts go here
+    *.md
+public/
+  blog/               # Blog cover images referenced from markdown/frontmatter
+    *
+```
